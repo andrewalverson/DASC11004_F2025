@@ -24,8 +24,24 @@ password = ''
 # lowercase are included twice so we get more of those
 characters = string.ascii_letters + string.ascii_lowercase + string.digits + string.punctuation
 
-for i in range(args.pw_length):
+# ensure there is at least one digit and one punctuation character
+password  = random.choice(string.punctuation)
+password += random.choice(string.digits)
+
+
+# loop over the desired pw length, but subtract 2 because above we already
+# added 2 characters, 1 digit and 1 punctuation character
+for i in range(args.pw_length - 2):
 	password += random.choice(characters)
 
-print(password)
+# randomize the password so the first two characters are less determinant
+
+print(f"before: {password}")
+
+# first convert it to a list
+char_list = list(password)
+random.shuffle(char_list)
+shuffled_password = ''.join(char_list)
+
+print(f"after: {shuffled_password}")
 
